@@ -21,7 +21,7 @@ class Robot(DRLRobot):
                          epsilon_decay=epsilon_decay, memory_size=memory_size, **model_params)
 
     @staticmethod
-    def _build_model(state_size=(1,), action_size=10, learning_rate=0.001, layers=(64, 64, 32), activation='relu',
+    def _build_model(state_size=(1,), action_size=10, learning_rate=0.001, layers=(64, 64), activation='relu',
                      reg_const=0):
         """
         Build a keras model that takes the game state as input and produces the expected future reward corresponding
@@ -68,13 +68,6 @@ class Robot(DRLRobot):
         return False
 
     @staticmethod
-    def ally_at_loc(game, robot, loc):
-        if loc in game.robots:
-            if game.robots[loc].player_id == robot.player_id:
-                return True
-        return False
-
-    @staticmethod
     def get_state(game, robot):
         """
         Return a numpy 'nd-array' representing this robot's state within the game.
@@ -90,8 +83,6 @@ class Robot(DRLRobot):
             game.turn % 10 == 0,
         ] + [
             Robot.enemy_at_loc(game, robot, loc) for loc in rg.locs_around(robot.location)
-        ] + [
-            Robot.ally_at_loc(game, robot, loc) for loc in rg.locs_around(robot.locaton)
         ]
 
         return np.array(state, dtype=np.float32)
@@ -120,7 +111,7 @@ def main():
     self_play = True
     params = {
         'learning_rate': 0.001,
-        'layers': [64, 64, 32],
+        'layers': [64, 64],
         'activation': 'relu',
         'mini_batch_size': 1000,  # roughly one game's worth of actions
         'memory_size': 10000,  # roughly 10 games worth of actions
