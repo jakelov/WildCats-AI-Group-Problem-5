@@ -129,7 +129,7 @@ def main():
         'memory_size': 10000,  # roughly 10 games worth of actions
         'reg_const': 0.000,
         'epsilon_decay': 0.99,
-        'state_size': (6,),
+        'state_size': (10,),
         'action_size': 10,
     }
 
@@ -170,14 +170,14 @@ def main():
         player3, robot3 = None, None
 
     check_states = np.array([
-        [0, 0, 0, 0, 0, 0],
-        [0, 1, 0, 0, 0, 0],
-        [1, 0, 0, 0, 0, 0],
-        [1, 1, 0, 0, 0, 0],
-        [0, 0, 1, 0, 0, 0],
-        [0, 0, 0, 1, 0, 0],
-        [0, 0, 0, 0, 1, 0],
-        [0, 0, 0, 0, 0, 1],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
     ], dtype=np.float32)
 
     logger.info('\n' + str(robot1.model(check_states).numpy().round(2)))
