@@ -114,7 +114,7 @@ class Robot(DRLRobot):
         elif (ally_at_loc(game, robot, loc) for loc in rg.locs_around(robot.location) > 1)
             # ended turn near allies
             return .75
-        elif (ally_at_loc(game, robot, loc) for loc in rg.locs_around(robot.location) > 1)
+        elif (enemy_at_loc(game, robot, loc) for loc in rg.locs_around(robot.location) > 1)
             # ended turn near enemies
             return -.75
         else:
